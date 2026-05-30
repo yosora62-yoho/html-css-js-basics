@@ -1,0 +1,829 @@
+/* CSS RESET - ทำให้เบราว์เซอร์เริ่มต้นเท่ากัน */
+/* 
+    * = selector พิเศษ หมายถึง "ทุก element"
+    margin: 0 = เอาระยะห่างรอบนอกออก
+    padding: 0 = เอาระยะห่างรอบในออก
+    box-sizing: border-box = ให้ width รวม padding และ border เข้าไปด้วย
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* ตัวแปร CSS (CSS Variables) 
+   เอาไว้เก็บค่าที่ใช้บ่อย จะได้แก้ทีเดียวจบ
+   :root = ระดับบนสุด ใช้ได้ทั่วทั้งไฟล์
+*/
+:root {
+    --primary: #667eea; /* สีหลัก ม่วงฟ้า */
+    --primary-dark: #5a67d8; /* สีหลักเข้มขึ้น */
+    --secondary: #764ba2;   /* สีรอง ม่วง */
+    --success: #4CAF50;    /* สีเขียว แสดงความสำเร็จ */
+    --danger: #f44336;      /* สีแดง แสดงข้อผิดพลาด */
+    --warning: #FF9800;    /* สีส้ม เตือนภัย */
+    --dark: #1a1a2e;          /* สีเทาเข้ม */
+    --light: #f8f9fa;         /* สีเทาอ่อน */
+    --gray: #6c757d;       /* สีเทากลาง */
+    --border-radius: 16px;   /* มุมมนขนาดใหญ่ */
+    --border-radius-sm: 12px; /* มุมมนขนาดกลาง */
+    --border-radius-md: 10px;  /* มุมมนขนาดเล็ก */
+    --box-shadow: 0 4px 6px rgba(0,0,0,0.1);     /* เงาเบา */
+    --box-shadow-lg: 0 10px 30px rgba(0,0,0,0.15); /* เงาหนัก */
+    --transition: all 0.3s ease;  /* เวลาเปลี่ยนเอฟเฟกต์ */
+}
+
+/* พื้นฐานของ Body
+   body = ส่วนหลักของเว็บที่ผู้ใช้เห็น
+*/
+body {
+    font-family: 'Prompt', 'Sarabun', Tahoma, Geneva, Verdana, sans-serif;
+    /* 
+        font-family = กำหนดฟอนต์
+        เรียงลำดับจากตัวแรกสุดที่เครื่องมี
+        'Prompt' = ฟอนต์สวย อ่านง่าย มีทั้งไทยและอังกฤษ
+        sans-serif = ฟอนต์ไม่มีเชิง (ตัวสำรอง)
+    */
+    line-height: 1.6;
+    /* line-height = ระยะห่างระหว่างบรรทัด 1.6 เท่าของขนาดฟอนต์ */
+    color: #333;
+    /* สีตัวอักษรหลักเป็นสีเทาเข้ม */
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    /* พื้นหลังไล่สีจากสีเทาอ่อนไปสีเทาอ่อนกว่า */
+    scroll-behavior: smooth;
+    /* scroll-behavior: smooth = เวลาเลื่อนหน้าแบบนุ่มนวล */
+}
+
+/* Navbar (เมนูนำทาง)
+   ติดอยู่ด้านบนเมื่อเลื่อนหน้า (sticky)
+*/
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    /* พื้นหลังสีขาวโปร่งแสง 95% */
+    backdrop-filter: blur(10px);
+    /* เอฟเฟกต์เบลอพื้นหลังด้านหลัง */
+    box-shadow: var(--box-shadow);
+    /* เงาเล็กน้อย */
+    position: sticky;
+    /* sticky = ติดอยู่ด้านบนเมื่อเลื่อน */
+    top: 0;
+    /* ติดขอบบน */
+    z-index: 1000;
+    /* z-index = ชั้นที่แสดง ยิ่งเลขมากยิ่งอยู่หน้า */
+    display: flex;
+    /* เปิดใช้ Flexbox */
+    justify-content: space-between;
+    /* จัดให้ชิดซ้าย-ขวา */
+    align-items: center;
+    /* จัดแนวตั้งให้อยู่กึ่งกลาง */
+    padding: 1rem 5%;
+    /* padding: บนล่าง 1rem, ซ้ายขวา 5% ของจอ */
+    flex-wrap: wrap;
+    /* ให้ขึ้นบรรทัดใหม่เมื่อที่ว่างไม่พอ */
+}
+
+/* โลโก้ */
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    /* พื้นหลังไล่สี */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    /* ให้พื้นหลังไล่สีแสดงบนตัวอักษร */
+}
+
+/* ปุ่ม hamburger สำหรับมือถือ (ซ่อนบนจอใหญ่) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--primary);
+}
+
+/* เมนูหลัก */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    /* เอา จุด/ตัวเลข นำหน้าออก */
+    gap: 2rem;
+    /* ระยะห่างระหว่างเมนู 2rem */
+}
+
+/* ลิงก์ในเมนู */
+.nav-link {
+    text-decoration: none;
+    /* เอาเส้นใต้ลิงก์ออก */
+    color: #333;
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+/* เมื่อเอาเมาส์ชี้ */
+.nav-link:hover {
+    color: var(--primary);
+}
+
+/* เส้นใต้เมื่อ hover */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+/* Hero Section (ส่วนต้อนรับ)
+   ส่วนแรกที่ผู้ใช้เห็นเมื่อเปิดเว็บ
+*/
+.hero {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    /* พื้นหลังไล่สี */
+    color: white;
+    text-align: center;
+    padding: 4rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+/* ปรับขนาดหัวข้อบนมือถือ */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+}
+
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+    /* โปร่งแสงเล็กน้อย */
+}
+
+/* ปุ่มใน Hero */
+.cta-button {
+    background: white;
+    color: var(--primary);
+    border: none;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 50px;
+    /* มุมมนมาก */
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+/* เมื่อเอาเมาส์ชี้ปุ่ม */
+.cta-button:hover {
+    transform: translateY(-3px);
+    /* ขยับขึ้น 3px */
+    box-shadow: var(--box-shadow-lg);
+}
+
+/* Content Section (ส่วนเนื้อหา)
+   ใช้กับ HTML, CSS, JavaScript Section
+*/
+.content-section {
+    padding: 3rem 1rem;
+}
+
+/* พื้นหลังสีขาวสลับ */
+.alt-bg {
+    background: white;
+}
+
+/* Container จำกัดความกว้าง จัดกึ่งกลาง */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    /* margin: 0 auto = จัดกึ่งกลางแนวนอน */
+    padding: 0 1rem;
+}
+
+/* หัวข้อระดับ 2 (h2) */
+.content-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #667eea;
+}
+
+/* เส้นตกแต่งข้างหัวข้อ */
+.content-section h2::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 32px;
+    background: var(--primary);
+    margin-right: 12px;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/* ส่วนแนะนำ (อธิบายว่า HTML/CSS/JS คืออะไร) */
+.section-intro {
+    background: #e8f0fe;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--primary);
+}
+
+.section-intro p {
+    margin-bottom: 0.5rem;
+}
+
+.section-intro p:last-child {
+    margin-bottom: 0;
+}
+
+/* หัวข้อระดับ 3 */
+.content-section h3 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    color: var(--secondary);
+}
+
+/* Cards Grid (การ์ดแสดงเนื้อหา)
+   ใช้ grid จัดเรียงอัตโนมัติ
+*/
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    /* auto-fill = เติมอัตโนมัติ, minmax = ขั้นต่ำ380px สูงสุด1ส่วน */
+    gap: 1.5rem;
+}
+
+/* ปรับบนมือถือให้เป็น 1 คอลัมน์ */
+@media (max-width: 768px) {
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* การ์ดแต่ละใบ */
+.card {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    box-shadow: var(--box-shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* เมื่อเอาเมาส์ชี้การ์ด */
+.card:hover {
+    transform: translateY(-5px);
+    /* ขยับขึ้น 5px */
+    box-shadow: var(--box-shadow-lg);
+}
+
+/* หัวข้อในการ์ด */
+.card h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.5rem;
+}
+
+/* Code Example (ส่วนแสดงโค้ด)
+   พื้นหลังสีดำเหมือน IDE
+*/
+.code-example {
+    background: #1e1e1e;
+    /* สีพื้นหลัง dark mode */
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    /* ถ้าโค้ดยาวเกิน ให้เลื่อนแนวนอนได้ */
+}
+.code-example pre {
+    color: #d4d4d4;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    /* ขึ้นบรรทัดใหม่อัตโนมัติ */
+    word-break: break-word;
+}
+
+.code-example code {
+    font-family: inherit;
+}
+
+/* Explanation Box (กล่องอธิบาย)
+   พื้นหลังสีฟ้าอ่อน มีขอบซ้ายสีม่วง
+*/
+.explanation-box {
+    background: #f0f4ff;
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    border-left: 4px solid var(--primary);
+}
+
+.explanation-box strong {
+    color: var(--primary);
+}
+
+.explanation-box code {
+    background: #e0e7ff;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+}
+
+
+/* Live Demo (ส่วนแสดงตัวอย่างสด)
+   ให้ผู้ใช้ได้ทดลองกดปุ่มดูผลลัพธ์
+*/
+.live-demo {
+    background: #f8f9fa;
+    border-radius: var(--border-radius-sm);
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.live-demo strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+}
+
+.demo-box {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+/* ปุ่มใน demo box */
+.demo-box button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 5px;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.demo-box button:hover {
+    background: var(--primary-dark);
+    transform: scale(1.02);
+}
+
+/* input ใน demo box */
+.demo-box input,
+.demo-box select {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin: 5px 0;
+    font-family: inherit;
+}
+
+/* ส่วนเกมทายตัวเลข (Game Section)
+   พื้นหลังสีเข้ม มีเกมให้เล่น
+*/
+.game-bg {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.game-intro {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    color: white;
+    border-left-color: var(--warning);
+}
+
+.game-intro code {
+    background: rgba(0, 0, 0, 0.3);
+    color: #FFD700;
+}
+
+/* กล่องเกมหลัก */
+.game-container {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--box-shadow-lg);
+}
+
+/* สถิติในเกม (3 ช่อง) */
+.game-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* การ์ดสถิติแต่ละอัน */
+.stat-card {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1rem;
+    border-radius: var(--border-radius-sm);
+    text-align: center;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.9;
+    margin-bottom: 0.5rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* ส่วนหลักของเกม */
+.game-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* ส่วนแสดงข้อความ */
+.game-display {
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.message-area {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hint-area {
+    font-size: 1rem;
+    color: #666;
+    padding: 0.75rem;
+    background: #e9ecef;
+    border-radius: 40px;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+/* ส่วนควบคุมเกม */
+.game-controls {
+    text-align: center;
+}
+
+/* ช่อง input สำหรับทายเลข */
+.guess-input {
+    width: 200px;
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    text-align: center;
+    border: 2px solid #ddd;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+    font-family: inherit;
+    transition: var(--transition);
+}
+
+.guess-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* กลุ่มปุ่ม */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* ปุ่มทายเลข */
+.guess-btn,
+.newgame-btn {
+    padding: 12px 24px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.guess-btn {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+.guess-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.guess-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ปุ่มเริ่มเกมใหม่ */
+.newgame-btn {
+    background: var(--warning);
+    color: white;
+}
+
+.newgame-btn:hover {
+    transform: translateY(-2px);
+    background: #f57c00;
+}
+
+/* ประวัติการทาย */
+.history-area {
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 1rem;
+}
+
+.history-area h4 {
+    margin-bottom: 1rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.history-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+/* แต่ละรายการในประวัติ */
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: white;
+    margin: 8px 0;
+    border-radius: var(--border-radius-md);
+    border-left: 4px solid;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.history-number {
+    font-weight: 500;
+}
+
+.history-result {
+    font-weight: 600;
+}
+
+.empty-history {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* ส่วนอธิบายโค้ดเกม */
+.game-code-explanation {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: var(--border-radius);
+}
+
+.game-code-explanation h3 {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.game-code-explanation .code-example {
+    margin-bottom: 1rem;
+}
+
+.game-code-explanation .explanation-box {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.game-code-explanation .explanation-box strong {
+    color: #FFD700;
+}
+
+.game-code-explanation .explanation-box code {
+    background: rgba(255, 255, 255, 0.2);
+    color: #FFD700;
+}
+
+/* Footer (ส่วนท้าย)
+   แสดงข้อมูลติดต่อและลิขสิทธิ์
+*/
+.footer {
+    background: var(--dark);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+    margin-top: 2rem;
+}
+
+.footer p {
+    margin: 0.5rem 0;
+}
+
+.footer-tip {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design (ปรับตามขนาดจอ)
+   สำหรับมือถือ (หน้าจอเล็กกว่า 768px)
+*/
+@media (max-width: 768px) {
+    /* แสดงปุ่ม hamburger */
+    .menu-toggle {
+        display: block;
+    }
+    
+    /* ซ่อนเมนูปกติก่อน */
+    .nav-menu {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0;
+        margin-top: 1rem;
+    }
+    
+    /* เมื่อมี class show ให้แสดงเมนู */
+    .nav-menu.show {
+        display: flex;
+    }
+    
+    /* จัดสไตล์เมนูแนวตั้ง */
+    .nav-menu li {
+        text-align: center;
+        padding: 0.75rem;
+        border-top: 1px solid #eee;
+    }
+    
+    /* ลดระยะห่าง container */
+    .container {
+        padding: 0 0.75rem;
+    }
+    
+    /* ลด padding section */
+    .content-section {
+        padding: 2rem 0.5rem;
+    }
+    
+    /* ลด padding การ์ด */
+    .card {
+        padding: 1rem;
+    }
+    
+    /* ลดขนาดฟอนต์โค้ด */
+    .code-example pre {
+        font-size: 0.75rem;
+    }
+    
+    /* ปรับเกมบนมือถือ */
+    .game-container {
+        padding: 1rem;
+    }
+    
+    .stat-value {
+        font-size: 1.2rem;
+    }
+    
+    .guess-input {
+        width: 150px;
+        padding: 12px 15px;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .guess-btn,
+    .newgame-btn {
+        width: 150px;
+    }
+    
+    .message-area {
+        font-size: 1rem;
+    }
+}
+
+/* Utility Classes (คลาสช่วยเหลือ)
+   ใช้เพิ่มเติมเมื่อต้องการ
+*/
+/* สไตล์สำหรับ code inline */
+code {
+    background: #f0f0f0;
+    padding: 2px 6px;
+    border-radius: 6px;
+    font-family: 'Consolas', monospace;
+    font-size: 0.85em;
+}
+
+/* ล้าง padding ใน pre code */
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* เอฟเฟกต์ไฮไลท์ */
+.highlight {
+    background: #ffeb3b;
+    transition: var(--transition);
+}
+
+/* Animation Fade In สำหรับการ์ด */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+
+/* Scrollbar (แถบเลื่อน)
+   ปรับให้สวยงาม
+*/
+
+/* scrollbar ทั้งหมด */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+/* แถบพื้นหลัง */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+/* แถบที่เลื่อน */
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 10px;
+}
+
+/* เมื่อ hover ที่แถบเลื่อน */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-dark);
+}
+
+/* Selection (เวลาลากเลือกข้อความ)
+   ปรับสีพื้นหลังเวลาลากเมาส์
+*/
+::selection {
+    background: var(--primary);
+    color: white;
+}
+
+::-moz-selection {
+    background: var(--primary);
+    color: white;
+}
+/* เอเอ้ซะกะดิ้งท์ ปุ๊ปปิ้ง ปะดุ้งดิ้งตุ้งปะตุ้งกิ้งฮี เอเอ้ฮี ซะกะตุ้งซะดะดิ้งท์ ปะตุ้งดิ้งท์ ปะตุ้งดิ้งท์ เอ้เอ้ห์ซะกะดิ้งกุ้งกิ้งโเอเอ้ ซะกะดิ้งท์
+*/

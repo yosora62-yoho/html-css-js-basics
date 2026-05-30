@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<!-- 
+    DOCTYPE = บอก browser ว่าไฟล์นี้เป็น HTML5
+    ต้องเขียนเป็นบรรทัดแรกสุดเสมอ ถ้าไม่เขียน browser อาจแสดงผลผิด
+-->
+
+<html lang="th"> 
+<!-- รากของเว็บไซต์ทั้งหมด
+    lang="th" = บอกว่าเว็บนี้ใช้ภาษาไทย ช่วยให้โปรแกรมอ่านหน้าจออ่านออกเสียงถูกต้อง-->
+    
+<head>
+    <!-- 
+        <head> = ส่วนหัวของเว็บ (ข้อมูลที่ไม่ได้แสดงบนหน้าเว็บ)
+        ใช้สำหรับกำหนด title, เชื่อมต่อ CSS, เชื่อมต่อ JS, SEO
+    -->
+    
+    <meta charset="UTF-8">
+    <!-- 
+        <meta charset="UTF-8"> = กำหนดการเข้ารหัสตัวอักษร
+        UTF-8 รองรับภาษาไทย, อังกฤษ, ญี่ปุ่น, จีน, อีโมจิ ทุกอย่าง
+        ถ้าไม่ใส่ ภาษาไทยอาจกลายเป็น ???????
+    -->
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <!-- 
+        viewport = ควบคุมการแสดงผลบนมือถือ
+        width=device-width = ให้ความกว้างเท่ากับหน้าจออุปกรณ์
+        initial-scale=1.0 = ซูมเริ่มต้นที่ 1 เท่า
+        user-scalable=yes = ให้ผู้ใช้ซูมได้ (สำคัญสำหรับมือถือ)
+        ทำให้เว็บดูดีทั้งจอมือถือและจอคอม
+    -->
+    
+    <title>📚 สอน HTML/CSS/JS แบบละเอียด</title>
+    <!-- 
+        <title> = ชื่อที่แสดงบนแท็บ browser
+        สำคัญต่อ SEO และผู้ใช้จำเว็บได้
+    -->
+    
+    <link rel="stylesheet" href="style.css">
+    <!-- 
+        <link> = เชื่อมไฟล์ภายนอกมาใช้
+        rel="stylesheet" = บอกว่าเป็นไฟล์ CSS
+        href="style.css" = ที่อยู่ไฟล์ (อยู่ในโฟลเดอร์เดียวกัน)
+    -->
+    
+    <!-- Google Fonts - ฟอนต์-->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- 
+        <body> = ส่วนเนื้อหาทั้งหมดที่ผู้ใช้เห็น
+        ทุกสิ่งที่แสดงบนหน้าเว็บต้องอยู่ใน body เท่านั้น
+    -->
+
+    <!-- ส่วนเมนูนำทาง (NAVBAR) -->
+    <nav class="navbar">
+        <!-- 
+            <nav> = แท็กสำหรับส่วนเมนูนำทาง (semantic HTML)
+            class="navbar" = ตั้งชื่อ class ไว้ให้ CSS ไปแต่ง
+            class ใช้กับหลาย element ได้ ซ้ำกันได้
+        -->
+        <div class="nav-brand">
+            <!-- <div> = division = กล่องสำหรับแบ่งเนื้อหา (block element) -->
+            📚 DevLearning
+        </div>
+        
+        <button class="menu-toggle" id="menuToggle">☰</button>
+        <!-- 
+            ปุ่ม hamburger สำหรับมือถือ เวลากดจะแสดงเมนู
+        -->
+        
+        <ul class="nav-menu" id="navMenu">
+            <!-- 
+                <ul> = Unordered List = รายการแบบไม่มีลำดับ (ใช้จุดนำ)
+                <li> = List Item = แต่ละรายการใน list
+            -->
+            <li><a href="#html-section" class="nav-link">HTML</a></li>
+            <li><a href="#css-section" class="nav-link">CSS</a></li>
+            <li><a href="#js-section" class="nav-link">JavaScript</a></li>
+            <li><a href="#game-section" class="nav-link">🎮 เล่นเกมทายเลข</a></li>
+        </ul>
+    </nav>
+
+    <!--  ส่วนต้อนรับ (HERO) -->
+    <section class="hero">
+        <!-- 
+            <section> = แบ่งส่วนเนื้อหา (semantic HTML)
+            ทำให้โครงสร้างชัดเจน
+        -->
+        <div class="hero-content">
+            <h1>🎓 เรียน HTML, CSS, JavaScript</h1>
+            <!-- 
+                <h1> ถึง <h6> = หัวข้อ
+                h1 = ใหญ่สุด (ใช้แค่ 1 อันต่อหน้า)
+                สำคัญต่อ SEO และการจัดลำดับเนื้อหา
+            -->
+            <p>อธิบายทุกบรรทัด แบบละเอียดๆ พร้อมตัวอย่างให้ลอง</p>
+            <!-- <p> = Paragraph = ย่อหน้า -->
+            <button class="cta-button" onclick="scrollToSection('html-section')">
+                📖 เริ่มเรียนเลย
+            </button>
+            <!-- 
+                <button> = ปุ่ม
+                onclick = event (เหตุการณ์) เมื่อคลิก
+                เรียกใช้ฟังก์ชัน JavaScript
+            -->
+        </div>
+    </section>
+
+    <!-- ส่วนที่ 1: HTML -->
+    <section id="html-section" class="content-section">
+        <!-- 
+            id="..." = ตั้ง id ให้ element
+            id ใช้ได้แค่ 1 อันต่อหน้า (unique)
+            ต่างจาก class ที่ใช้ซ้ำได้
+            ใช้สำหรับลิงก์ (#html-section) หรือ JavaScript เจาะจง
+        -->
+        <div class="container">
+            <h2>📄 HTML - โครงสร้างเว็บไซต์</h2>
+            <div class="section-intro">
+                <p><strong>HTML คืออะไร?</strong> HTML ย่อมาจาก HyperText Markup Language คือภาษาที่ใช้สำหรับสร้างโครงสร้างของเว็บไซต์ เหมือนกับโครงกระดูกของมนุษย์ ถ้าไม่มี HTML เว็บไซต์ก็จะไม่มีอะไรเลย</p>
+                <p><strong>ใช้ทำอะไร?</strong> ใช้กำหนดว่าบนเว็บไซต์จะมีอะไรบ้าง เช่น หัวข้อ, ย่อหน้า, รูปภาพ, ปุ่ม, ฟอร์มรับข้อมูล, ตาราง, ลิงก์ต่างๆ</p>
+                <p><strong>ใช้ยังไง?</strong> เขียนแท็ก <> กำกับเนื้อหา เช่น <code>&lt;h1&gt;หัวข้อ&lt;/h1&gt;</code> browser จะอ่านแล้วแสดงผลเป็นหัวข้อใหญ่</p>
+            </div>
+            
+            <h3>🏷️ แท็ก HTML ที่ต้องรู้จัก</h3>
+            <div class="cards-grid">
+                
+                <!-- การ์ดที่ 1: แท็กพื้นฐาน -->
+                <div class="card">
+                    <h4>📌 แท็กพื้นฐาน</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;!-- นี่คือคอมเมนต์ ไม่แสดงผล --&gt;
+
+&lt;h1&gt;หัวข้อระดับ 1&lt;/h1&gt;
+&lt;h2&gt;หัวข้อระดับ 2&lt;/h2&gt;
+&lt;h3&gt;หัวข้อระดับ 3&lt;/h3&gt;
+
+&lt;p&gt;นี่คือย่อหน้า ใช้สำหรับเขียนข้อความยาวๆ&lt;/p&gt;
+
+&lt;div&gt;กล่องสำหรับจัดกลุ่มเนื้อหา&lt;/div&gt;
+
+&lt;span&gt;ใช้สำหรับตกแต่งข้อความเฉพาะส่วน&lt;/span&gt;</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>&lt;h1&gt;~&lt;h6&gt;</code> = หัวข้อ ตัวเลขยิ่งน้อยตัวยิ่งใหญ่ (h1 ใหญ่สุด h6 เล็กสุด)<br>
+                        • <code>&lt;p&gt;</code> = ย่อหน้า ขึ้นบรรทัดใหม่ มีระยะห่างด้านบนล่าง<br>
+                        • <code>&lt;div&gt;</code> = กล่องแบบ block กว้างเต็มแนวนอน ใช้จัดโครงสร้าง<br>
+                        • <code>&lt;span&gt;</code> = กล่องแบบ inline กว้างเท่าเนื้อหา ใช้ตกแต่งเฉพาะส่วน<br>
+                        • <code>&lt;!-- --&gt;</code> = คอมเมนต์ ไว้จดโน้ม ไม่แสดงผลบนหน้าเว็บ
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองดูผลลัพธ์:</strong>
+                        <div class="demo-box">
+                            <h1>หัวข้อระดับ 1</h1>
+                            <h2>หัวข้อระดับ 2</h2>
+                            <p>นี่คือตัวอย่างย่อหน้า ข้อความจะแสดงแบบนี้</p>
+                            <div style="background:#f0f0f0; padding:10px;">กล่อง div มีพื้นหลังสีเทา</div>
+                            <span style="color:red;">span ทำให้ข้อความนี้เป็นสีแดง</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 2: ลิงก์และรูปภาพ -->
+                <div class="card">
+                    <h4>🔗 ลิงก์และรูปภาพ</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;!-- ลิงก์ไปเว็บอื่น --&gt;
+&lt;a href="https://google.com" target="_blank"&gt;
+  ไปที่ Google
+&lt;/a&gt;
+
+&lt;!-- ลิงก์ไปหน้าอื่นในเว็บเรา --&gt;
+&lt;a href="about.html"&gt;
+  เกี่ยวกับเรา
+&lt;/a&gt;
+
+&lt;!-- รูปภาพ --&gt;
+&lt;img src="https://picsum.photos/200" 
+     alt="รูปตัวอย่าง"
+     width="200"&gt;</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>&lt;a&gt;</code> = anchor สร้างลิงก์ <code>href</code> = ปลายทางที่จะไป<br>
+                        • <code>target="_blank"</code> = เปิดลิงก์ในแท็บใหม่<br>
+                        • <code>&lt;img&gt;</code> = รูปภาพ <code>src</code> = ที่อยู่รูป, <code>alt</code> = ข้อความเมื่อโหลดรูปไม่ได้ (สำคัญต่อ SEO)<br>
+                        • <code>width/height</code> = กำหนดขนาดรูป (พิกเซล)
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองดูผลลัพธ์:</strong>
+                        <div class="demo-box">
+                            <p><a href="https://youtu.be/Fdh_sQlieg8?si=_yGuPR1O6mrxS6nm" target="_blank">🔗 คลิกเพื่อไปที่ๆชอบ</a></p>
+                            <p><img src="https://picsum.photos/150/100" alt="รูปสุ่ม" style="border-radius:10px;"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 3: รายการ (List) -->
+                <div class="card">
+                    <h4>📝 รายการ (List)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;!-- รายการแบบมีจุด --&gt;
+&lt;ul&gt;
+  &lt;li&gt;แอปเปิ้ล&lt;/li&gt;
+  &lt;li&gt;กล้วย&lt;/li&gt;
+  &lt;li&gt;ส้ม&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- รายการแบบมีเลข --&gt;
+&lt;ol&gt;
+  &lt;li&gt;ขั้นตอนที่ 1&lt;/li&gt;
+  &lt;li&gt;ขั้นตอนที่ 2&lt;/li&gt;
+  &lt;li&gt;ขั้นตอนที่ 3&lt;/li&gt;
+&lt;/ol&gt;</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>&lt;ul&gt;</code> = Unordered List (มีจุดนำหน้า)<br>
+                        • <code>&lt;ol&gt;</code> = Ordered List (มีเลข 1,2,3 นำหน้า)<br>
+                        • <code>&lt;li&gt;</code> = List Item แต่ละรายการ<br>
+                        • ใช้ทำเมนู, รายการสินค้า, ขั้นตอนต่างๆ
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองดูผลลัพธ์:</strong>
+                        <div class="demo-box">
+                            <ul>
+                                <li>แอปเปิ้ล</li>
+                                <li>กล้วย</li>
+                                <li>ส้ม</li>
+                            </ul>
+                            <ol>
+                                <li>ไปขี้</li>
+                                <li>กินข้าว</li>
+                                <li>นอน</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 4: ตาราง -->
+                <div class="card">
+                    <h4>📊 ตาราง (Table)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;table border="1"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;ชื่อ&lt;/th&gt;
+      &lt;th&gt;อายุ&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;สมชาย&lt;/td&gt;
+      &lt;td&gt;25&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;สมหญิง&lt;/td&gt;
+      &lt;td&gt;22&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>&lt;table&gt;</code> = เริ่มต้นตาราง<br>
+                        • <code>&lt;tr&gt;</code> = Table Row (1 แถว)<br>
+                        • <code>&lt;th&gt;</code> = Table Header (หัวตาราง ตัวหนา)<br>
+                        • <code>&lt;td&gt;</code> = Table Data (เซลล์ข้อมูล)<br>
+                        • <code>&lt;thead&gt;/&lt;tbody&gt;</code> = แบ่งส่วนหัวและเนื้อหา
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองดูผลลัพธ์:</strong>
+                        <div class="demo-box">
+                            <table border="1" style="border-collapse: collapse; width:100%;">
+                                <thead>
+                                    <tr><th>ชื่อ</th><th>อายุ</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>สมชาย</td><td>25</td><tr>
+                                    <tr><td>ลีน</td><td>15</td><tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 5: ฟอร์มและอินพุต -->
+                <div class="card">
+                    <h4>📝 ฟอร์ม (Form)</h4>
+                    <div class="code-example">
+                        <pre><code>&lt;form&gt;
+  &lt;label&gt;ชื่อ:&lt;/label&gt;
+  &lt;input type="text" 
+         placeholder="กรอกชื่อ"&gt;
+  
+  &lt;label&gt;อีเมล:&lt;/label&gt;
+  &lt;input type="email"&gt;
+  
+  &lt;select&gt;
+    &lt;option&gt;กรุงเทพ&lt;/option&gt;
+    &lt;option&gt;เชียงใหม่&lt;/option&gt;
+  &lt;/select&gt;
+  
+  &lt;button type="submit"&gt;
+    ส่งข้อมูล
+  &lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>&lt;form&gt;</code> = ฟอร์มสำหรับรับข้อมูลผู้ใช้<br>
+                        • <code>&lt;input&gt;</code> = ช่องรับข้อมูล type: text, email, password, number, checkbox, radio, file<br>
+                        • <code>&lt;select&gt;</code> = dropdown เมนูเลือก <code>&lt;option&gt;</code> = ตัวเลือก<br>
+                        • <code>&lt;label&gt;</code> = ป้ายกำกับ ช่วยให้คลิกที่ข้อความแล้ว focus ที่ input<br>
+                        • <code>&lt;button&gt;</code> = ปุ่ม type="submit" = ส่งฟอร์ม
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองดูผลลัพธ์:</strong>
+                        <div class="demo-box">
+                            <form onsubmit="alert('ส่งข้อมูลแล้ว!'); return false;">
+                                <label>ชื่อ: <input type="text" placeholder="กรอกชื่อ" style="width:100%; margin:5px 0;"></label>
+                                <label>อีเมล: <input type="email" placeholder="อีเมล" style="width:100%; margin:5px 0;"></label>
+                                <select style="width:100%; margin:5px 0;">
+                                    <option>กรุงเทพ</option>
+                                    <option>เชียงใหม่</option>
+                                </select>
+                                <button type="submit" style="margin-top:10px;">ส่งข้อมูล</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ส่วนที่ 2: CSS -->
+    <section id="css-section" class="content-section alt-bg">
+        <div class="container">
+            <h2>🎨 CSS - การตกแต่งและจัดวาง</h2>
+            <div class="section-intro">
+                <p><strong>CSS คืออะไร?</strong> CSS ย่อมาจาก Cascading Style Sheets คือภาษาที่ใช้สำหรับตกแต่งเว็บไซต์ให้สวยงาม เหมือนกับเสื้อผ้าและเครื่องประดับของมนุษย์</p>
+                <p><strong>ใช้ทำอะไร?</strong> กำหนดสี ขนาดตัวอักษร พื้นหลัง ระยะห่าง ตำแหน่ง การจัดวาง อนิเมชั่น ทำให้เว็บน่าดูและใช้งานง่าย</p>
+                <p><strong>ใช้ยังไง?</strong> เขียน selector แล้วกำหนด property: value เช่น <code>h1 { color: red; font-size: 30px; }</code></p>
+            </div>
+            
+            <h3>🎨 พื้นฐาน CSS ที่ต้องรู้</h3>
+            <div class="cards-grid">
+                
+                <!-- การ์ดที่ 1: Selector -->
+                <div class="card">
+                    <h4>🔍 Selector (ตัวเลือก)</h4>
+                    <div class="code-example">
+                        <pre><code>/* Element Selector - เลือกตามชื่อแท็ก */
+p {
+  color: blue;
+}
+
+/* Class Selector - ใช้ . นำหน้า */
+.box {
+  background: yellow;
+  padding: 10px;
+}
+
+/* ID Selector - ใช้ # นำหน้า (ใช้แค่ 1 อัน) */
+#header {
+  background: black;
+  color: white;
+}
+
+/* Multiple Selector - เลือกหลายอัน */
+h1, h2, h3 {
+  font-family: 'Prompt';
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <strong>Element Selector</strong> = เลือกตามชื่อแท็ก เช่น p, div, h1 (แต่งทุกอันที่เหมือนกัน)<br>
+                        • <strong>Class Selector</strong> = ใช้ .(จุด) ตามด้วยชื่อ class ใช้ซ้ำได้หลายอัน<br>
+                        • <strong>ID Selector</strong> = ใช้ # ตามด้วยชื่อ id ใช้ได้แค่ 1 อันต่อหน้า<br>
+                        • <strong>ความสำคัญ</strong>: ID > Class > Element
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 2: Box Model -->
+                <div class="card">
+                    <h4>📦 Box Model (สำคัญมาก!)</h4>
+                    <div class="code-example">
+                        <pre><code>.box {
+  width: 200px;
+  padding: 20px;     /* ขอบด้านใน */
+  border: 2px solid black; /* ขอบ */
+  margin: 30px;      /* ขอบด้านนอก */
+  box-sizing: border-box;
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 Box Model อธิบาย:</strong><br>
+                        ทุก element ใน HTML เป็นกล่อง 4 ชั้น:<br>
+                        • <strong>Content</strong> = เนื้อหาข้างใน (ข้อความ, รูป)<br>
+                        • <strong>Padding</strong> = ระยะห่างระหว่าง content กับ border (ขยายกล่องออก)<br>
+                        • <strong>Border</strong> = เส้นขอบ<br>
+                        • <strong>Margin</strong> = ระยะห่างจาก element อื่น<br>
+                        • <code>box-sizing: border-box;</code> ทำให้ width รวม padding+border (ง่ายกว่า)
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ดูตัวอย่าง Box Model:</strong>
+                        <div class="demo-box">
+                            <div style="background:#ffeb3b; width:200px; padding:20px; border:3px solid black; margin:20px auto; text-align:center;">
+                                เนื้อหา<br>
+                                padding:20px<br>
+                                border:3px<br>
+                                margin:20px
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 3: Flexbox -->
+                <div class="card">
+                    <h4>🔲 Flexbox (การจัดวาง)</h4>
+                    <div class="code-example">
+                        <pre><code>.container {
+  display: flex;
+  flex-direction: row;      /* row, column */
+  justify-content: center;  /* แนวหลัก */
+  align-items: center;      /* แนวรอง */
+  gap: 20px;               /* ระยะห่าง */
+  flex-wrap: wrap;         /* ขึ้นบรรทัดใหม่ */
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 Flexbox อธิบาย:</strong><br>
+                        • <code>display: flex;</code> = เปิดโหมด Flexbox<br>
+                        • <code>flex-direction</code> = ทิศทาง (row=แนวนอน, column=แนวตั้ง)<br>
+                        • <code>justify-content</code> = จัดแนวแกนหลัก (center, space-between, flex-start, flex-end)<br>
+                        • <code>align-items</code> = จัดแนวแกนรอง (center, stretch)<br>
+                        • <code>gap</code> = ระยะห่างระหว่างลูก<br>
+                        • <code>flex-wrap</code> = ให้กระโดดบรรทัดเมื่อที่ว่างไม่พอ
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ดูตัวอย่าง Flexbox:</strong>
+                        <div class="demo-box">
+                            <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                                <div style="background:#4CAF50; padding:15px; color:white;">ชิ้นที่1</div>
+                                <div style="background:#2196F3; padding:15px; color:white;">ชิ้นที่2</div>
+                                <div style="background:#FF9800; padding:15px; color:white;">ชิ้นที่3</div>
+                            </div>
+                            <p style="font-size:12px; margin-top:5px;">↑ จัดแนวนอน กึ่งกลาง ระยะห่างเท่ากัน</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 4: สีและพื้นหลัง -->
+                <div class="card">
+                    <h4>🎨 สีและพื้นหลัง</h4>
+                    <div class="code-example">
+                        <pre><code>/* สีตัวอักษร */
+color: red;
+color: #FF0000;      /* HEX */
+color: rgb(255,0,0); /* RGB */
+
+/* พื้นหลัง */
+background-color: #f0f0f0;
+background-image: url('bg.jpg');
+background: linear-gradient(135deg, #667eea, #764ba2);</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <strong>สีแบบชื่อ</strong> = red, blue, green, yellow<br>
+                        • <strong>สีแบบ HEX</strong> = #RRGGBB (00-FF) เช่น #FF0000 = แดง<br>
+                        • <strong>สีแบบ RGB</strong> = rgb(แดง, เขียว, น้ำเงิน) 0-255<br>
+                        • <strong>Gradient</strong> = การไล่สี สวยงาม<br>
+                        • <strong>rgba()</strong> = RGB + alpha (ความโปร่งใส) 0-1
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 5: ตัวอักษร -->
+                <div class="card">
+                    <h4>✏️ ตัวอักษร</h4>
+                    <div class="code-example">
+                        <pre><code>p {
+  font-family: 'Prompt', sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1.5;
+  text-decoration: underline;
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>font-family</code> = ฟอนต์ที่ใช้ (เรียงจากตัวแรกที่มี)<br>
+                        • <code>font-size</code> = ขนาดตัวอักษร (px, rem, em)<br>
+                        • <code>font-weight</code> = ความหนา (normal, bold, 100-900)<br>
+                        • <code>text-align</code> = จัดแนว (left, center, right, justify)<br>
+                        • <code>line-height</code> = ระยะห่างระหว่างบรรทัด<br>
+                        • <code>text-decoration</code> = ขีดเส้น (underline, line-through, none)
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 6: Responsive -->
+                <div class="card">
+                    <h4>📱 Responsive (จอเล็ก-ใหญ่)</h4>
+                    <div class="code-example">
+                        <pre><code>/* จอใหญ่ (คอมพิวเตอร์) */
+.container {
+  width: 1200px;
+  margin: auto;
+}
+
+/* จอเล็ก (มือถือ) */
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    padding: 10px;
+  }
+  .menu {
+    flex-direction: column;
+  }
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <strong>Media Query</strong> = เปลี่ยน CSS ตามขนาดหน้าจอ<br>
+                        • <code>@media (max-width: 768px)</code> = เมื่อจอกว้างน้อยกว่า 768px<br>
+                        • ทำให้เว็บดูดีทั้งมือถือและคอมพิวเตอร์<br>
+                        • ใช้หน่วย <code>vw/vh</code> = viewport width/height<br>
+                        • ใช้ <code>%</code> แทน px เพื่อความยืดหยุ่น
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองปรับขนาดหน้าจอ:</strong>
+                        <div class="demo-box" style="background:#2196F3; color:white; text-align:center; padding:20px;">
+                            <span id="screenSizeMsg">จอกว้างมากกว่า 768px</span>
+                        </div>
+                        <script>
+                            function updateScreenMsg() {
+                                const msg = document.getElementById('screenSizeMsg');
+                                if(window.innerWidth <= 768) msg.innerText = '📱 จอมือถือ (น้อยกว่า 768px)';
+                                else msg.innerText = '💻 จอคอมพิวเตอร์ (มากกว่า 768px)';
+                            }
+                            updateScreenMsg();
+                            window.addEventListener('resize', updateScreenMsg);
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ส่วนที่ 3: JavaScript -->
+    <section id="js-section" class="content-section">
+        <div class="container">
+            <h2>⚡ JavaScript - ทำให้เว็บมีชีวิต</h2>
+            <div class="section-intro">
+                <p><strong>JavaScript คืออะไร?</strong> JavaScript คือภาษาโปรแกรมที่ทำงานบนเบราว์เซอร์ ทำให้เว็บไซต์มีชีวิต โต้ตอบกับผู้ใช้ได้ เหมือนสมองและระบบประสาทของมนุษย์</p>
+                <p><strong>ใช้ทำอะไร?</strong> กดปุ่มแล้วมีอะไรเกิดขึ้น, นับเลข, ตรวจสอบฟอร์ม, โหลดข้อมูล, สร้างเกม, ทำอนิเมชั่น, เชื่อมต่อ API</p>
+                <p><strong>ใช้ยังไง?</strong> เขียนโค้ดใน <code>&lt;script&gt;</code> หรือไฟล์ .js แล้ว browser จะรันให้</p>
+            </div>
+            
+            <h3>⚡ พื้นฐาน JavaScript ที่ต้องรู้</h3>
+            <div class="cards-grid">
+                
+                <!-- การ์ดที่ 1: ตัวแปร -->
+                <div class="card">
+                    <h4>📦 ตัวแปร (Variables)</h4>
+                    <div class="code-example">
+                        <pre><code>// let - เปลี่ยนค่าได้ (ใช้บ่อยสุด)
+let name = "นินิ";
+name = "นินินานา";  // เปลี่ยนได้
+
+// const - ค่าคงที่ เปลี่ยนไม่ได้
+const PI = 3.14159;
+// PI = 3;  // ERROR!
+
+// ประเภทข้อมูล
+let text = "ข้อความ";     // String
+let number = 10;         // Number
+let isFun = true;        // Boolean
+let fruits = ["แอปเปิ้ล", "กล้วย"]; // Array
+let user = {             // Object
+  name: "นินิ",
+  age: 5
+};</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>let</code> = ประกาศตัวแปร เปลี่ยนค่าทีหลังได้ (ใช้บ่อยที่สุด)<br>
+                        • <code>const</code> = ค่าคงที่ เปลี่ยนไม่ได้ (ใช้กับค่าที่ไม่เปลี่ยน)<br>
+                        • <code>String</code> = ข้อความ ใส่ "" หรือ ''<br>
+                        • <code>Number</code> = ตัวเลข ทั้งจำนวนเต็มและทศนิยม<br>
+                        • <code>Boolean</code> = จริง/เท็จ (true/false)<br>
+                        • <code>Array</code> = รายการข้อมูล ใช้ []<br>
+                        • <code>Object</code> = ข้อมูลแบบมีชื่อ ใช้ {}
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองเล่นกับตัวแปร:</strong>
+                        <div class="demo-box">
+                            <button onclick="let name = prompt('กรอกชื่อของคุณ'); if(name) alert('สวัสดี ' + name);">💬 ทักทาย</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 2: เงื่อนไข -->
+                <div class="card">
+                    <h4>🔄 เงื่อนไข (if/else)</h4>
+                    <div class="code-example">
+                        <pre><code>let score = 75;
+
+if (score >= 80) {
+  console.log("เกรด A");
+} else if (score >= 70) {
+  console.log("เกรด B");
+} else if (score >= 60) {
+  console.log("เกรด C");
+} else {
+  console.log("เกรด F");
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>if (เงื่อนไข) { ... }</code> = ถ้าเงื่อนไขเป็นจริง ทำใน {}<br>
+                        • <code>else if</code> = ถ้าไม่ตรง if แต่ตรงเงื่อนไขนี้<br>
+                        • <code>else</code> = ถ้าไม่ตรงเงื่อนไขไหนเลย<br>
+                        • <code>===</code> = เท่ากัน (เปรียบเทียบทั้งค่าและชนิด), <code>!==</code> = ไม่เท่ากัน<br>
+                        • <code>></code>, <code><</code>, <code>>=</code>, <code><=</code> = มากกว่า, น้อยกว่า, มากกว่าหรือเท่ากัน, น้อยกว่าหรือเท่ากัน<br>
+                        • <code>&&</code> = และ, <code>||</code> = หรือ, <code>!</code> = ไม่
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ทดสอบเงื่อนไข:</strong>
+                        <div class="demo-box">
+                            <input type="number" id="scoreInput" placeholder="กรอกคะแนน 0-100">
+                            <button onclick="let score=document.getElementById('scoreInput').value; let result=''; if(score>=80) result='เกรด A ดีมาก!'; else if(score>=70) result='เกรด B ดี!'; else if(score>=60) result='เกรด C พอใช้'; else if(score>=50) result='เกรด D ควรปรับปรุง'; else result='เกรด F คุณโง่มาก'; alert('คะแนน '+score+' ได้ '+result);">ตรวจเกรด</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 3: การวนซ้ำ -->
+                <div class="card">
+                    <h4>🔄 การวนซ้ำ (Loop)</h4>
+                    <div class="code-example">
+                        <pre><code>// for loop - รู้จำนวนรอบ
+for (let i = 0; i < 5; i++) {
+  console.log("รอบที่ " + i);
+}
+
+// while loop - ไม่รู้จำนวนรอบ
+let count = 0;
+while (count < 5) {
+  console.log("นับ: " + count);
+  count++;
+}</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>for (เริ่มต้น; เงื่อนไข; เพิ่มค่า)</code> = ใช้เมื่อรู้จำนวนรอบ<br>
+                        • เริ่มต้นที่ 0, วนจนกว่าเงื่อนไขเป็นเท็จ, เพิ่มค่าทีละ 1<br>
+                        • <code>while (เงื่อนไข)</code> = ใช้เมื่อไม่รู้จำนวนรอบ วนตราบใดที่เงื่อนไขเป็นจริง<br>
+                        • <code>forEach</code> = วน array แบบง่าย
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองวนซ้ำ:</strong>
+                        <div class="demo-box">
+                            <button onclick="let result=''; for(let i=1;i<=5;i++) result+=i+' '; alert('ตัวเลข 1-5: '+result);">แสดง 1-5</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 4: ฟังก์ชัน -->
+                <div class="card">
+                    <h4>⚙️ ฟังก์ชัน (Function)</h4>
+                    <div class="code-example">
+                        <pre><code>// ประกาศฟังก์ชัน
+function sayHello(name) {
+  return "สวัสดี " + name;
+}
+
+// เรียกใช้ฟังก์ชัน
+let message = sayHello("นินิ");
+console.log(message); // "สวัสดี นินิ"
+
+// Arrow function (แบบสั้น)
+const add = (a, b) => a + b;</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>function ชื่อ(parameter) { ... }</code> = สร้างฟังก์ชัน<br>
+                        • <code>return</code> = คืนค่ากลับ (ถ้าไม่มี return จะได้ undefined)<br>
+                        • <code>parameter</code> = ตัวแปรที่รับค่าตอนเรียกใช้<br>
+                        • <code>Arrow function</code> = วิธีเขียนแบบสั้น (=>)<br>
+                        • ใช้ฟังก์ชันเพื่อไม่ต้องเขียนโค้ดซ้ำ
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองใช้ฟังก์ชัน:</strong>
+                        <div class="demo-box">
+                            <input type="number" id="num1" placeholder="เลขที่1">
+                            <input type="number" id="num2" placeholder="เลขที่2">
+                            <button onclick="let a=Number(document.getElementById('num1').value); let b=Number(document.getElementById('num2').value); alert('ผลรวม = '+(a+b));">คำนวณรวม</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 5: DOM Manipulation -->
+                <div class="card">
+                    <h4>🎯 การเข้าถึงและเปลี่ยน HTML</h4>
+                    <div class="code-example">
+                        <pre><code>// หา element
+let title = document.getElementById("myTitle");
+let box = document.querySelector(".box");
+
+// เปลี่ยนข้อความ
+title.innerText = "ข้อความใหม่";
+
+// เปลี่ยน HTML ข้างใน
+box.innerHTML = "&lt;strong&gt;ตัวหนา&lt;/strong&gt;";
+
+// เปลี่ยน CSS
+title.style.color = "red";
+title.classList.add("highlight");</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>document.getElementById("id")</code> = หา element จาก id<br>
+                        • <code>document.querySelector(".class")</code> = หา element แรกที่ตรง selector<br>
+                        • <code>.innerText</code> = เปลี่ยนข้อความข้างใน (HTML ไม่ถูก render)<br>
+                        • <code>.innerHTML</code> = เปลี่ยน HTML ข้างใน (render แท็กได้)<br>
+                        • <code>.style.ชื่อProperty</code> = เปลี่ยน CSS แบบ inline<br>
+                        • <code>.classList.add/remove/toggle</code> = จัดการ class
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองเปลี่ยนข้อความ:</strong>
+                        <div class="demo-box">
+                            <p id="demoText">ข้อความเดิม</p>
+                            <button onclick="document.getElementById('demoText').innerText='เปลี่ยนแล้ว!';">เปลี่ยนข้อความ</button>
+                            <button onclick="document.getElementById('demoText').style.color='red';">เปลี่ยนสีแดง</button>
+                            <button onclick="document.getElementById('demoText').style.fontSize='20px';">ขยายตัวอักษร</button>
+                            <button onclick="document.getElementById('demoText').innerText='ข้อความเดิม'; document.getElementById('demoText').style.color='black'; document.getElementById('demoText').style.fontSize='16px';">รีเซ็ต</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- การ์ดที่ 6: Event -->
+                <div class="card">
+                    <h4>🖱️ Event (การตอบสนอง)</h4>
+                    <div class="code-example">
+                        <pre><code>// คลิก
+button.onclick = function() {
+  alert("ถูกคลิก!");
+};
+
+// addEventListener (แนะนำ)
+button.addEventListener("click", () => {
+  console.log("คลิก");
+});
+
+// Event ประเภทต่างๆ
+// onclick, ondblclick, onmouseenter
+// onkeydown, onkeyup
+// onsubmit, onchange</code></pre>
+                    </div>
+                    <div class="explanation-box">
+                        <strong>🔍 อธิบาย:</strong><br>
+                        • <code>onclick</code> = เมื่อคลิก<br>
+                        • <code>ondblclick</code> = ดับเบิลคลิก<br>
+                        • <code>onmouseenter</code> = เมื่อเมาส์ชี้<br>
+                        • <code>onmouseleave</code> = เมื่อเมาส์ออก<br>
+                        • <code>onkeydown</code> = เมื่อกดแป้นคีย์บอร์ด<br>
+                        • <code>addEventListener</code> = เพิ่ม event ได้หลายอัน
+                    </div>
+                    <div class="live-demo">
+                        <strong>🎯 ลองเล่น Event:</strong>
+                        <div class="demo-box">
+                            <button id="clickBtnDemo">คลิกฉัน</button>
+                            <button id="hoverBtnDemo" onmouseenter="this.innerText='เมาส์มาแล้ว!'" onmouseleave="this.innerText='เอาเมาส์มา'">เอาเมาส์มา</button>
+                            <script>
+                                document.getElementById('clickBtnDemo').onclick = () => alert('คลิกทำไม');
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ส่วนที่ 4: เกมทายตัวเลข ตัวอย่าง  -->
+    <section id="game-section" class="content-section game-bg">
+        <div class="container">
+            <h2>🎮 เกมทายตัวเลข</h2>
+            <div class="section-intro game-intro">
+                <p><strong>เกมนี้ใช้ JavaScript ทั้งหมด!</strong> ลองเล่นแล้วสังเกตว่าโค้ดทำงานยังไง</p>
+                <p>📌 กติกา: ระบบจะสุ่มเลข 1-100 ให้คุณทาย พิมพ์ตัวเลขด้านล่าง แล้วกดทาย</p>
+                <p>💡 ยิ่งทายผิดน้อย ยิ่งเก่ง</p>
+            </div>
+            
+            <div class="game-container">
+                <div class="game-stats">
+                    <div class="stat-card">
+                        <span class="stat-label">🎯 เป้าหมาย</span>
+                        <span class="stat-value" id="targetRange">1 - 100</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">📝 ครั้งที่ทาย</span>
+                        <span class="stat-value" id="attemptCount">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-label">🏆 สถิติสูงสุด</span>
+                        <span class="stat-value" id="highScore">-</span>
+                    </div>
+                </div>
+                
+                <div class="game-main">
+                    <div class="game-display">
+                        <div class="message-area" id="gameMessage">
+                            💡 พิมพ์ตัวเลขแล้วกดทาย
+                        </div>
+                        <div class="hint-area" id="hintArea">
+                            ❓ รอคำใบ้...
+                        </div>
+                    </div>
+                    
+                    <div class="game-controls">
+                        <input type="number" id="guessInput" class="guess-input" placeholder="พิมพ์ตัวเลข 1-100" min="1" max="100">
+                        <div class="button-group">
+                            <button class="guess-btn" id="guessBtn">🔍 ทายเลย!</button>
+                            <button class="newgame-btn" id="newGameBtn">🎲 เริ่มใหม่</button>
+                        </div>
+                    </div>
+                    
+                    <div class="history-area">
+                        <h4>📜 ประวัติการทาย</h4>
+                        <div id="historyList" class="history-list">
+                            <p class="empty-history">ยังไม่มีประวัติ...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- แสดงโค้ด JavaScript ของเกมให้ดู -->
+            <div class="game-code-explanation">
+                <h3>📖 โค้ด JavaScript ของเกมนี้</h3>
+                <div class="code-example">
+                    <pre><code>// เกมทายตัวเลข - เรียนรู้ JavaScript จากการเล่น!
+let secretNumber;      // ตัวเลขลับ
+let attempts;          // จำนวนครั้งที่ทาย
+let highScore;         // สถิติสูงสุด
+
+// ฟังก์ชันเริ่มเกมใหม่
+function initGame() {
+    secretNumber = Math.floor(Math.random() * 100) + 1;
+    attempts = 0;
+    updateDisplay();
+}
+
+// ฟังก์ชันตรวจสอบการทาย
+function checkGuess() {
+    let guess = Number(input.value);
+    attempts++;
+    
+    if (guess === secretNumber) {
+        // ถูกต้อง!
+        messageDiv.innerText = "🎉 ถูกต้อง! เก่งมาก!";
+        if (highScore === null || attempts < highScore) {
+            highScore = attempts;
+        }
+    } else if (guess > secretNumber) {
+        // มากไป
+        messageDiv.innerText = "📈 มากไป! ลองน้อยกว่านี้";
+    } else {
+        // น้อยไป
+        messageDiv.innerText = "📉 น้อยไป! ลองมากกว่านี้";
+    }
+}</code></pre>
+                </div>
+                <div class="explanation-box">
+                    <strong>🔍 อธิบายโค้ดเกม:</strong><br>
+                    • <code>Math.random()</code> = สุ่มตัวเลข 0-1 (ไม่รวม 1)<br>
+                    • <code>Math.floor()</code> = ปัดเศษลง ทำให้ได้เลขจำนวนเต็ม<br>
+                    • <code>if/else</code> = ตรวจสอบเงื่อนไขว่าทายถูกหรือผิด<br>
+                    • <code>localStorage</code> = เก็บสถิติสูงสุดไว้ แม้ปิด browser<br>
+                    • <code>document.getElementById()</code> = เข้าถึง element ใน HTML<br>
+                    • <code>.innerText</code> = เปลี่ยนข้อความใน element
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ส่วนท้าย (Footer) -->
+    <footer class="footer">
+        <div class="container">
+            <p>🍯 สร้างโดย YOSORA </p>
+            <p>✨ จำไว้: ยัดเข้าไปในสมองซะ ✨</p>
+            <p class="footer-tip">💡 Tips: กด F12 เพื่อเปิด Developer Tools ดู Console และทดสอบโค้ด</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <!-- 
+        <script> = เชื่อมต่อ JavaScript
+        ควรวางไว้ท้าย body เพื่อให้ HTML โหลดก่อน
+    -->
+    
+    <!-- โค้ดเกมทายตัวเลข (放在这里也可以) -->
+    <script>
+        // เกมทายตัวเลข
+        let secretNumber;
+        let attempts;
+        let highScore = localStorage.getItem('guessGameHighScore');
+        let history = [];
+        // DOM elements
+        const guessInput = document.getElementById('guessInput');
+        const guessBtn = document.getElementById('guessBtn');
+        const newGameBtn = document.getElementById('newGameBtn');
+        const gameMessage = document.getElementById('gameMessage');
+        const hintArea = document.getElementById('hintArea');
+        const attemptCountSpan = document.getElementById('attemptCount');
+        const highScoreSpan = document.getElementById('highScore');
+        const historyList = document.getElementById('historyList');
+        
+        // แสดงสถิติสูงสุด
+        if (highScore === null) {
+            highScoreSpan.innerText = '-';
+        } else {
+            highScoreSpan.innerText = highScore;
+        }
+        
+        // ฟังก์ชันเริ่มเกมใหม่
+        function initGame() {
+            // สุ่มเลข 1-100
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            history = [];
+            
+            // UI
+            updateAttemptDisplay();
+            gameMessage.innerHTML = '🎲 เริ่มเกมใหม่! ทายเลข 1-100 เลย';
+            hintArea.innerHTML = '❓ รอคำใบ้...';
+            hintArea.style.color = '#666';
+            guessInput.value = '';
+            guessInput.disabled = false;
+            guessBtn.disabled = false;
+            guessInput.focus();
+            updateHistoryDisplay();
+            
+            console.log('เกมเริ่ม! (เฉลย: ' + secretNumber + ')'); //เฉลยใน console
+        }
+        
+        //จำนวนครั้งที่ทาย
+        function updateAttemptDisplay() {
+            attemptCountSpan.innerText = attempts;
+        }
+        
+        //ประวัติการทาย
+        function updateHistoryDisplay() {
+            if (history.length === 0) {
+                historyList.innerHTML = '<p class="empty-history">📭 ยังไม่มีประวัติ...</p>';
+                return;
+            }
+            
+            let html = '';
+            for (let i = 0; i < history.length; i++) {
+                const item = history[i];
+                let emoji = '';
+                let color = '';
+                if (item.result === 'ถูกต้อง!') {
+                    emoji = '✅';
+                    color = '#4CAF50';
+                } else if (item.result === 'มากไป') {
+                    emoji = '📈';
+                    color = '#FF9800';
+                } else {
+                    emoji = '📉';
+                    color = '#2196F3';
+                }
+                html += `<div class="history-item" style="border-left-color: ${color}">
+                            <span class="history-number">${emoji} ${item.number}</span>
+                            <span class="history-result" style="color: ${color}">${item.result}</span>
+                        </div>`;
+            }
+            historyList.innerHTML = html;
+        }
+        
+        // ฟังก์ชันทายเลข
+        function checkGuess() {
+            // รับค่าจาก input
+            let guess = Number(guessInput.value);
+            
+            // ตรวจสอบว่าป้อนค่าถูก
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                gameMessage.innerHTML = '⚠️ กรุณาป้อนตัวเลขระหว่าง 1-100 เท่านั้น!';
+                guessInput.value = '';
+                guessInput.focus();
+                return;
+            }
+            
+            // เพิ่มจำนวนครั้ง
+            attempts++;
+            updateAttemptDisplay();
+            
+            // ตรวจสอบผลการทาย
+            let resultText = '';
+            let messageText = '';
+            let hintText = '';
+            
+            if (guess === secretNumber) {
+                // ทายถูก!!!
+                resultText = 'ถูกต้อง!';
+                messageText = `🎉🎉🎉 ถูกต้อง! ตัวเลขคือ ${secretNumber} 🎉🎉🎉`;
+                hintText = `🎯 คุณทายถูกในครั้งที่ ${attempts}!`;
+                hintArea.style.color = '#4CAF50';
+                
+                // เช็คสถิติสูงสุด
+                if (highScore === null || highScore === '-' || attempts < Number(highScore)) {
+                    highScore = attempts;
+                    highScoreSpan.innerText = highScore;
+                    localStorage.setItem('guessGameHighScore', highScore);
+                    messageText += ` 🏆 ทำลายสถิติ! (${attempts} ครั้ง)`;
+                } else {
+                    messageText += ` สถิติสูงสุดคือ ${highScore} ครั้ง`;
+                }
+                
+                // ปิดการใช้งานปุ่ม
+                guessInput.disabled = true;
+                guessBtn.disabled = true;
+                
+            } else if (guess > secretNumber) {
+                // ทายมากไป
+                resultText = 'มากไป';
+                messageText = `📈 ${guess} มากไป ลองทายเลขที่น้อยกว่านี้`;
+                hintText = `🔽 ตัวเลขน้อยกว่า ${guess}`;
+                hintArea.style.color = '#FF9800';
+            } else {
+                // ทายน้อยไป
+                resultText = 'น้อยไป';
+                messageText = `📉 ${guess} น้อยไป! ลองทายเลขที่มากกว่านี้`;
+                hintText = `🔼 ตัวเลขมากกว่า ${guess}`;
+                hintArea.style.color = '#2196F3';
+            }
+            
+            // บันทึกประวัติ
+            history.push({
+                number: guess,
+                result: resultText
+            });
+            
+            // อัปเดต UI
+            gameMessage.innerHTML = messageText;
+            hintArea.innerHTML = hintText;
+            guessInput.value = '';
+            updateHistoryDisplay();
+            
+            // เลื่อน history ไปด้านล่าง
+            historyList.scrollTop = historyList.scrollHeight;
+            
+            // ถ้าทายถูก ให้ focus ที่ปุ่มเริ่มใหม่
+            if (guess === secretNumber) {
+                newGameBtn.focus();
+            } else {
+                guessInput.focus();
+            }
+        }
+        
+        // กด Enter ใน input
+        function handleKeyPress(e) {
+            if (e.key === 'Enter' && !guessInput.disabled) {
+                checkGuess();
+            }
+        }
+        
+        // ผูก event
+        guessBtn.addEventListener('click', checkGuess);
+        newGameBtn.addEventListener('click', initGame);
+        guessInput.addEventListener('keypress', handleKeyPress);
+        
+        // เริ่มเกม
+        initGame();
+    </script>
+</body>
+</html>
